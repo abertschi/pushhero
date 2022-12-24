@@ -155,29 +155,30 @@ class _ShareScreenState extends State<ShareScreen> {
 
   String _manualDynamicLink(String uriString) {
     final encodedUri = Uri.encodeComponent(uriString);
-    return 'https://dindondan.page.link/?link=$encodedUri&apn=app.dindondan.contapersone&afl=$encodedUri&ibi=app.dindondan.contapersone&ifl=$encodedUri&isi=1513235116';
+    return 'https://pushhero.page.link/?link=$encodedUri&apn=app.dindondan.contapersone&afl=$encodedUri&ibi=app.dindondan.contapersone&ifl=$encodedUri&isi=1513235116';
   }
 
   Future<String> _shortDynamicLink(String uriString) async {
+
     final DynamicLinkParameters parameters = DynamicLinkParameters(
-      uriPrefix: 'https://dindondan.page.link',
+      uriPrefix: 'https://pushhero.page.link',
       link: Uri.parse(uriString),
       androidParameters: AndroidParameters(
           packageName: 'app.dindondan.contapersone',
           minimumVersion: 0,
           fallbackUrl: Uri.parse(uriString)),
-      iosParameters: IosParameters(
+      iosParameters: IOSParameters(
           bundleId: 'app.dindondan.contapersone',
           appStoreId: '1513235116',
           minimumVersion: '0.0.0',
           fallbackUrl: Uri.parse(uriString)),
-      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
-          shortDynamicLinkPathLength: ShortDynamicLinkPathLength.unguessable),
+      // dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+      //     shortDynamicLinkPathLength: ShortDynamicLinkPathLength.unguessable),
     );
 
     ShortDynamicLink shortLink =
-        await parameters.buildShortLink().timeout(Duration(seconds: 10));
-
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters).timeout(Duration(seconds: 10));
+    
     return shortLink.shortUrl.toString();
   }
 

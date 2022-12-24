@@ -204,7 +204,7 @@ class StatsScreenState extends State<StatsScreen> {
   }
 
   Future<String> _generateCSV() async {
-    final timeSeriesList = _timeSeriesStream.valueWrapper.value.subcounters;
+    final timeSeriesList = _timeSeriesStream.value.subcounters;
 
     // Get all the sorted time instants of all the points.
     // Each instant will correspond to a table row.

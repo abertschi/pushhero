@@ -285,7 +285,7 @@ class HistoryState extends State<History> {
   }
 
   void _openStatsScreen(CounterToken token) {
-    FirebaseAnalytics()
+    FirebaseAnalytics.instance
         .logEvent(name: 'open_stats_from_history', parameters: null);
     Navigator.of(context).push(
       MaterialPageRoute(

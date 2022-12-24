@@ -58,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     if (kIsWeb) {
       // Retrieve the shared counter token from the query string, if present
-      final webUri = Uri.tryParse(getHref());
+      final webUri = Uri.tryParse(href);
       if (webUri != null && webUri.queryParameters['token'] != null) {
         print("Found web uri with token.");
         _followDeepLink(webUri);
@@ -71,8 +71,8 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       });
 
-      FirebaseDynamicLinks.instance.onLink(
-        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      FirebaseDynamicLinks.instance.onLink.listen(
+        (PendingDynamicLinkData dynamicLink) async {
           final Uri deepLink = dynamicLink?.link;
 
           if (deepLink != null) {
@@ -80,14 +80,12 @@ class _HomeScreenState extends State<HomeScreen> {
           }
 
           return null;
-        },
-        onError: (OnLinkErrorException e) async {
+        }).onError((e) async {
           print('onLinkError');
           print(e.message);
 
           return null;
-        },
-      );
+        });
     }
   }
 
@@ -113,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _startSubcounter({@required CounterToken token, CounterData initData}) {
-    FirebaseAnalytics().logEvent(name: 'start_subcounter', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'start_subcounter', parameters: null);
     Navigator.of(context).popUntil((route) => route.isFirst);
     print('Starting subcounter for id $token');
     Navigator.of(context).push(
@@ -229,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _openInfoScreen() {
-    FirebaseAnalytics().logEvent(name: 'open_info', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'open_info', parameters: null);
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => InfoScreen(),
@@ -238,12 +236,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _signOut() {
-    FirebaseAnalytics().logEvent(name: 'signout', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'signout', parameters: null);
     _auth.signOut();
   }
 
   void _createCounter() async {
-    FirebaseAnalytics().logEvent(name: 'create_counter', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'create_counter', parameters: null);
 
     setState(() {
       _status = HomeStatus.creating_counter;
@@ -287,7 +285,8 @@ class _HomeScreenState extends State<HomeScreen> {
         _status = HomeStatus.ready;
       });
     } catch (error) {
-      FirebaseAnalytics()
+      print(error);
+      FirebaseAnalytics.instance
           .logEvent(name: 'counter_creation_error', parameters: null);
       showErrorDialog(
         context: context,
@@ -299,7 +298,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _showAccountError() {
-    FirebaseAnalytics().logEvent(name: 'account_error', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'account_error', parameters: null);
 
     return showErrorDialog(
       context: context,
@@ -311,7 +310,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _showNetworkError() {
-    FirebaseAnalytics().logEvent(name: 'connection_error', parameters: null);
+    FirebaseAnalytics.instance.logEvent(name: 'connection_error', parameters: null);
 
     return showErrorDialog(
       context: context,
@@ -322,7 +321,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> _showIncompleteSignupError() {
-    FirebaseAnalytics()
+    FirebaseAnalytics.instance
         .logEvent(name: 'incomplete_signup_error', parameters: null);
 
     return showErrorDialog(

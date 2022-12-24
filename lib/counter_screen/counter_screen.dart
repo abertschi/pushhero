@@ -194,7 +194,7 @@ class _CounterScreenState extends State<CounterScreen> {
 
   // Set the subcounter label
   void _submitSubcounterLabel(String label) async {
-    FirebaseAnalytics().logEvent(name: 'submit_entrance_name');
+    FirebaseAnalytics.instance.logEvent(name: 'submit_entrance_name');
 
     FirebaseFirestore.instance
         .collection('counters')
@@ -209,7 +209,7 @@ class _CounterScreenState extends State<CounterScreen> {
 
   // Set the counter capacity
   void _submitCapacity(int capacity) async {
-    FirebaseAnalytics().logEvent(name: 'submit_capacity');
+    FirebaseAnalytics.instance.logEvent(name: 'submit_capacity');
 
     FirebaseFirestore.instance
         .collection('counters')
@@ -496,7 +496,7 @@ class _CounterScreenState extends State<CounterScreen> {
   }
 
   void _openShareScreen() {
-    FirebaseAnalytics()
+    FirebaseAnalytics.instance
         .logEvent(name: 'open_share_from_counter', parameters: null);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -510,7 +510,7 @@ class _CounterScreenState extends State<CounterScreen> {
   }
 
   void _openStatsScreen() {
-    FirebaseAnalytics()
+    FirebaseAnalytics.instance
         .logEvent(name: 'open_stats_from_counter', parameters: null);
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -532,7 +532,7 @@ class _CounterScreenState extends State<CounterScreen> {
   /// Resets the counter by removing all events from all subcounters
   void _resetCounter() async {
     if (await _resetConfirmDialog()) {
-      FirebaseAnalytics().logEvent(name: 'reset_counter', parameters: null);
+      FirebaseAnalytics.instance.logEvent(name: 'reset_counter', parameters: null);
 
       final subcounterIds = <String>[
         _thisSubcounterId,

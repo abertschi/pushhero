@@ -189,12 +189,12 @@ class _SignInScreenState extends State<SignInScreen> {
       _isLoading = true;
     });
     if (_validateAndSave()) {
-      FirebaseAnalytics().logEvent(name: 'signin_attempt', parameters: null);
+      FirebaseAnalytics.instance.logEvent(name: 'signin_attempt', parameters: null);
       setState(() {
         _isLoading = false;
       });
       try {
-        FirebaseAnalytics()
+        FirebaseAnalytics.instance
             .logEvent(name: 'signin_successful', parameters: null);
         // Firebase sign-in
         await widget.auth.signIn(_email, _password);
@@ -223,14 +223,14 @@ class _SignInScreenState extends State<SignInScreen> {
           case "network-request-failed":
             message = AppLocalizations.of(context).signInNetworkError;
         }
-        FirebaseAnalytics()
+        FirebaseAnalytics.instance
             .logEvent(name: 'signin_error', parameters: {'code': message});
         setState(() {
           _isLoading = false;
           _errorMessage = message;
         });
       } catch (error) {
-        FirebaseAnalytics().logEvent(name: 'signin_error', parameters: null);
+        FirebaseAnalytics.instance.logEvent(name: 'signin_error', parameters: null);
         print(error);
         print('Unexpected sign-in error.');
       }

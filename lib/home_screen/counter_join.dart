@@ -57,7 +57,7 @@ class CounterJoinForm extends StatelessWidget {
   Future<void> _scan(BuildContext context) async {
     try {
       Uri uri = await scanUriQRCode(context);
-      FirebaseAnalytics().logEvent(name: 'scan', parameters: null);
+      FirebaseAnalytics.instance.logEvent(name: 'scan', parameters: null);
 
       PendingDynamicLinkData data =
           await FirebaseDynamicLinks.instance.getDynamicLink(uri);
@@ -72,7 +72,7 @@ class CounterJoinForm extends StatelessWidget {
         }
       }
     } catch (error) {
-      FirebaseAnalytics().logEvent(name: 'scan_fail', parameters: null);
+      FirebaseAnalytics.instance.logEvent(name: 'scan_fail', parameters: null);
       if (onError != null) {
         onError();
       } else {

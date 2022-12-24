@@ -59,3 +59,4 @@ app.*.map.json
 # Lock files
 **/Podfile.Lock
 pubspec.lock
+lib/firebase_options.dart

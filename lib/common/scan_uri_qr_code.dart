@@ -90,7 +90,7 @@ class _ScanScreenState extends State<_ScanScreen> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if (widget.scanCallback != null) {
-        widget.scanCallback(scanData);
+        widget.scanCallback(scanData.toString());
         controller.dispose();
       }
       if (widget.closeOnScan) {
