@@ -353,8 +353,8 @@ class _CounterScreenState extends State<CounterScreen> {
                       child: Icon(Icons.remove),
                       onPressed: () => _updateCounter(-1),
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[300],
-                        onPrimary: Colors.grey[600],
+                        backgroundColor: Colors.grey[300],
+                        foregroundColor: Colors.grey[600],
                       ),
                     ),
                     flex: 3,

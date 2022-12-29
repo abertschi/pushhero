@@ -1,8 +1,6 @@
 import 'package:contapersone/common/auth.dart';
 import 'package:contapersone/common/entities.dart';
 import 'package:contapersone/common/show_error_dialog.dart';
-import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,7 +10,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:share/share.dart';
 
 import '../common/palette.dart';
-import '../common/secret.dart';
 import '../counter_screen/counter_screen.dart';
 
 /// A screen that displays a QR code and sharable link for a given counter

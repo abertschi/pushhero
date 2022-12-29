@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -34,11 +35,8 @@ class MyApp extends StatelessWidget {
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Palette.primary.toMaterialColor(),
-          buttonColor: Palette.primary,
-          accentColor: Palette.primary,
           appBarTheme:
-              AppBarTheme.of(context).copyWith(brightness: Brightness.dark),
+              AppBarTheme.of(context).copyWith(systemOverlayStyle: SystemUiOverlayStyle.light), colorScheme: ColorScheme.fromSwatch(primarySwatch: Palette.primary.toMaterialColor()).copyWith(secondary: Palette.primary),
         ),
         initialRoute: '/',
         routes: {

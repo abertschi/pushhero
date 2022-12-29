@@ -1,9 +1,8 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 import '../common/auth.dart';
 import '../common/secret.dart';
@@ -112,14 +111,14 @@ class _SignInScreenState extends State<SignInScreen> {
     return new TextButton(
         child: new Text(AppLocalizations.of(context).signUpButton,
             textAlign: TextAlign.center, style: new TextStyle(fontSize: 16.0)),
-        onPressed: () => launch(Secret.signUpURL));
+        onPressed: () => launchUrlString(Secret.signUpURL));
   }
 
   Widget _showPasswordRecovery() {
     return new TextButton(
         child: new Text(AppLocalizations.of(context).forgotPasswordButton,
             style: new TextStyle(fontSize: 16.0)),
-        onPressed: () => launch(Secret.recoverPasswordURL));
+        onPressed: () => launchUrlString(Secret.recoverPasswordURL));
   }
 
   Widget _showErrorMessage() {

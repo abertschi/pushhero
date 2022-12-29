@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 /// A screen with basic information on this app
 class InfoScreen extends StatelessWidget {
@@ -39,7 +39,7 @@ class InfoScreen extends StatelessWidget {
                           child:
                               Text(AppLocalizations.of(context).donateButton),
                           onPressed: () =>
-                              launch('https://dindondan.app/donate.php'),
+                              launchUrlString('https://dindondan.app/donate.php'),
                         )
                       ]
                     : []),
@@ -47,7 +47,7 @@ class InfoScreen extends StatelessWidget {
                 TextButton.icon(
                   icon: Icon(Icons.mail),
                   label: Text('Feedback'),
-                  onPressed: () => launch('mailto:feedback@dindondan.app'),
+                  onPressed: () => launchUrlString('mailto:feedback@dindondan.app'),
                 ),
               ],
             ),

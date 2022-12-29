@@ -7,7 +7,7 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:window_location_href/window_location_href.dart';
 
 import '../common/auth.dart';
@@ -328,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       title: AppLocalizations.of(context).incompleteSignUpErrorTitle,
       text: "",
-      onContinue: () => launch(Secret.incompleteSignUpURL),
+      onContinue: () => launchUrlString(Secret.incompleteSignUpURL),
       onExit: () => _auth.signOut(),
     );
   }
@@ -342,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
             constraints: BoxConstraints(maxWidth: 400),
             child: MaterialButton(
               onPressed: () =>
-                  launch('https://www.dindondan.app/contapersone/'),
+                  launchUrlString('https://www.dindondan.app/contapersone/'),
               child: Container(
                 padding: EdgeInsets.all(10),
                 child: Row(
